@@ -80,8 +80,6 @@
 
     }
 
-
-
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -108,8 +106,8 @@
 @media (max-width: 768px) {
     .vimarsh-hero {
         padding: 40px 15px;
-        border-bottom-left-radius: 50px;
-        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
     }
 
     .vimarsh-hero h1 {
@@ -138,7 +136,7 @@
 
 @media (max-width: 480px) {
     .vimarsh-hero {
-        background: url(https://res.cloudinary.com/dnwpgcx7i/image/upload/c_fill,w_320,h_804/v1757529812/photo-collage.png_2_rwv8as.png);
+        background: url("https://res.cloudinary.com/dnwpgcx7i/image/upload/v1757593238/Collage_photot_for_Mobile_tdlpkx.png") center / cover no-repeat;
     }
 
     .vimarsh-hero h1 {
@@ -469,7 +467,7 @@
 /* --- MOBILE MEDIA QUERY --- */
 @media (max-width: 768px) {
     .brouchure {
-        background: url(https://res.cloudinary.com/dnwpgcx7i/image/upload/c_fill,w_320,h_804/v1757529812/photo-collage.png_2_rwv8as.png);
+        background: url('https://res.cloudinary.com/dnwpgcx7i/image/upload/v1757593238/Collage_photot_for_Mobile_tdlpkx.png') center / cover no-repeat;
     }
 
     .book {
@@ -520,7 +518,7 @@
 
 @media (max-width: 480px) {
     .brouchure {
-        background: url(https://res.cloudinary.com/dnwpgcx7i/image/upload/c_fill,w_320,h_804/v1757529812/photo-collage.png_2_rwv8as.png);
+        background: url("https://res.cloudinary.com/dnwpgcx7i/image/upload/v1757593238/Collage_photot_for_Mobile_tdlpkx.png") center / cover no-repeat;
     }
 
     .book {
