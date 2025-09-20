@@ -62,9 +62,9 @@ function initSpeakersSlider() {
 
     // Dynamic speed helper
     function getSpeed() {
-        if (window.innerWidth <= 480) return 30; // phones
-        if (window.innerWidth <= 768) return 40;  // tablets
-        return 35; // desktops
+        if (window.innerWidth <= 480) return 40; // phones
+        if (window.innerWidth <= 768) return 60;  // tablets
+        return 65; // desktops
     }
 
     let animRunning = false;
