@@ -217,37 +217,33 @@ function initScheduleButton() {
     // Set this to true when the schedule is ready
     const isScheduleReady = false;
 
+    // Find all the necessary elements first
     const scheduleButton = document.querySelector('.btn-primary[href="schedule.html"]');
     const scheduleModal = document.getElementById('scheduleModal');
     const closeModalButton = document.getElementById('closeScheduleModal');
 
-    if (!scheduleButton) return;
+    // ✅ IMPORTANT: Only proceed if ALL required elements exist on the current page
+    if (scheduleButton && scheduleModal && closeModalButton) {
 
-    scheduleButton.addEventListener('click', function (event) {
-        if (!isScheduleReady) {
-            // If schedule is not ready, prevent navigation
-            event.preventDefault();
-            // Show the 'Coming Soon' modal
-            if (scheduleModal) {
+        scheduleButton.addEventListener('click', function (event) {
+            if (!isScheduleReady) {
+                event.preventDefault();
                 scheduleModal.style.display = 'flex';
             }
-        }
-        // If isScheduleReady is true, the link will work as normal.
-    });
+            // If isScheduleReady is true, the link works normally
+        });
 
-    // Logic to close the modal
-    if (scheduleModal && closeModalButton) {
         closeModalButton.addEventListener('click', () => {
             scheduleModal.style.display = 'none';
         });
 
-        // Also close by clicking outside the modal content
         scheduleModal.addEventListener('click', (event) => {
             if (event.target === scheduleModal) {
                 scheduleModal.style.display = 'none';
             }
         });
     }
+
 }
 
 
@@ -492,14 +488,16 @@ function initKnowMore() {
         });
     }
 
-    document.addEventListener('click', (e) => {
-        if (!yearNav.contains(e.target) &&
-            !hamburgerMenu.contains(e.target) &&
-            yearNav.classList.contains('active')) {
-            yearNav.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+    if (yearNav && hamburgerMenu) {
+        document.addEventListener('click', (e) => {
+            if (yearNav.classList.contains('active') &&
+                !yearNav.contains(e.target) &&
+                !hamburgerMenu.contains(e.target)) {
+                yearNav.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
