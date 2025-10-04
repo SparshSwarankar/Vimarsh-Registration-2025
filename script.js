@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initArchiveSection();
     initLightbox();
     initKnowMore();
+    initScheduleButton();
     lazyLoadImages(); // Initial lazy load
 });
 
@@ -208,6 +209,45 @@ function initArchiveSection() {
             card.style.transform = "rotateX(0) rotateY(0)";
         });
     });
+}
+
+// ✅ Add this entire new function
+function initScheduleButton() {
+    // --- CONTROLLER ---
+    // Set this to true when the schedule is ready
+    const isScheduleReady = false;
+
+    const scheduleButton = document.querySelector('.btn-primary[href="schedule.html"]');
+    const scheduleModal = document.getElementById('scheduleModal');
+    const closeModalButton = document.getElementById('closeScheduleModal');
+
+    if (!scheduleButton) return;
+
+    scheduleButton.addEventListener('click', function (event) {
+        if (!isScheduleReady) {
+            // If schedule is not ready, prevent navigation
+            event.preventDefault();
+            // Show the 'Coming Soon' modal
+            if (scheduleModal) {
+                scheduleModal.style.display = 'flex';
+            }
+        }
+        // If isScheduleReady is true, the link will work as normal.
+    });
+
+    // Logic to close the modal
+    if (scheduleModal && closeModalButton) {
+        closeModalButton.addEventListener('click', () => {
+            scheduleModal.style.display = 'none';
+        });
+
+        // Also close by clicking outside the modal content
+        scheduleModal.addEventListener('click', (event) => {
+            if (event.target === scheduleModal) {
+                scheduleModal.style.display = 'none';
+            }
+        });
+    }
 }
 
 
