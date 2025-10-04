@@ -212,10 +212,10 @@ function initArchiveSection() {
 }
 
 // ✅ Add this entire new function
+const isScheduleReady = false;
 function initScheduleButton() {
     // --- CONTROLLER ---
     // Set this to true when the schedule is ready
-    const isScheduleReady = false;
 
     // Find all the necessary elements first
     const scheduleButton = document.querySelector('.btn-primary[href="schedule.html"]');
