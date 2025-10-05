@@ -213,20 +213,16 @@ function initArchiveSection() {
 }
 
 // ✅ Add this entire new function
+// âœ… MOVE this OUTSIDE the function, at the top of your script
 const isScheduleReady = false;
-function initScheduleButton() {
-    console.log("Schedule button initialized. isScheduleReady =", isScheduleReady);
-    // --- CONTROLLER ---
-    // Set this to true when the schedule is ready
 
+function initScheduleButton() {
     // Find all the necessary elements first
-    const scheduleButton = document.querySelector('.btn-primary[href="schedule.html"]');
+    const scheduleButton = document.querySelector('a.btn-primary[href="schedule.html"]');
     const scheduleModal = document.getElementById('scheduleModal');
     const closeModalButton = document.getElementById('closeScheduleModal');
 
-    // ✅ IMPORTANT: Only proceed if ALL required elements exist on the current page
     if (scheduleButton && scheduleModal && closeModalButton) {
-
         scheduleButton.addEventListener('click', function (event) {
             if (!isScheduleReady) {
                 event.preventDefault();
@@ -245,7 +241,6 @@ function initScheduleButton() {
             }
         });
     }
-
 }
 
 
