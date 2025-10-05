@@ -218,7 +218,7 @@ const isScheduleReady = false;
 
 function initScheduleButton() {
     // Find all the necessary elements first
-    const scheduleButton = document.querySelector('a.btn-primary[href="schedule.html"]');
+    const scheduleButton = document.getElementById('schedule-btn');
     const scheduleModal = document.getElementById('scheduleModal');
     const closeModalButton = document.getElementById('closeScheduleModal');
 
