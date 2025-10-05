@@ -13,9 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     initSpeakersHeading();
     initGallerySection();
     initArchiveSection();
+    initScheduleButton();
     initLightbox();
     initKnowMore();
-    initScheduleButton();
+
     lazyLoadImages(); // Initial lazy load
 });
 
@@ -214,6 +215,7 @@ function initArchiveSection() {
 // ✅ Add this entire new function
 const isScheduleReady = false;
 function initScheduleButton() {
+    console.log("Schedule button initialized. isScheduleReady =", isScheduleReady);
     // --- CONTROLLER ---
     // Set this to true when the schedule is ready
 
@@ -273,93 +275,102 @@ function lazyLoadImages() {
 }
 
 function initLightbox() {
-    // Filter functionality
+    // ===== FILTER FUNCTIONALITY =====
     const filterBtns = document.querySelectorAll(".filter-btn");
     const galleryItems = document.querySelectorAll(".gallery-item");
-    if (!filterBtns.length || !galleryItems.length) return;
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelector(".filter-btn.active")?.classList.remove("active");
-            btn.classList.add("active");
+    // Only run filter logic if buttons exist
+    if (filterBtns.length > 0 && galleryItems.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelector(".filter-btn.active")?.classList.remove("active");
+                btn.classList.add("active");
 
-            const year = btn.dataset.filter;
+                const year = btn.dataset.filter;
 
-            galleryItems.forEach(item => {
-                if (year === "all" || item.dataset.year === year) {
-                    item.classList.remove("hide");
-                } else {
-                    item.classList.add("hide");
-                }
+                galleryItems.forEach(item => {
+                    if (year === "all" || item.dataset.year === year) {
+                        item.classList.remove("hide");
+                    } else {
+                        item.classList.add("hide");
+                    }
+                });
+                lazyLoadImages(); // Re-run lazy load for newly visible items
             });
-
-            lazyLoadImages(); // ensure visible items load
         });
-    });
-}
-
-// Initial lazy load
-lazyLoadImages();
-
-// ===== LIGHTBOX FUNCTIONALITY =====
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.querySelector(".lightbox-content");
-const closeBtn = document.querySelector("#lightbox .close");
-const prevArrow = document.querySelector(".lightbox-arrow.left");
-const nextArrow = document.querySelector(".lightbox-arrow.right");
-
-let currentIndex = -1;
-
-function getVisibleImages() {
-    return [...document.querySelectorAll(".gallery-item:not(.hide) img.loaded")];
-}
-
-function showLightbox(index) {
-    const visibleImages = getVisibleImages();
-    if (!visibleImages.length) return;
-    currentIndex = index;
-    lightbox.style.display = "flex";
-    lightboxImg.src = visibleImages[currentIndex].src;
-}
-
-// Open lightbox on click (only for loaded images)
-document.addEventListener("click", e => {
-    if (e.target.matches(".gallery-item img.loaded")) {
-        const visibleImages = getVisibleImages();
-        const index = visibleImages.indexOf(e.target);
-        if (index !== -1) showLightbox(index);
     }
-});
 
-// Close lightbox
-closeBtn.addEventListener("click", () => lightbox.style.display = "none");
-lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) lightbox.style.display = "none";
-});
+    // ===== LIGHTBOX FUNCTIONALITY =====
+    const lightbox = document.getElementById("lightbox");
 
-// Navigate
-prevArrow.addEventListener("click", () => {
-    const visibleImages = getVisibleImages();
-    if (!visibleImages.length) return;
-    currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
-    lightboxImg.src = visibleImages[currentIndex].src;
-});
+    // ✅ IMPORTANT: Only run the rest of the code if the lightbox exists on the page
+    if (lightbox) {
+        const lightboxImg = document.querySelector(".lightbox-content");
+        const closeBtn = document.querySelector("#lightbox .close");
+        const prevArrow = document.querySelector(".lightbox-arrow.left");
+        const nextArrow = document.querySelector(".lightbox-arrow.right");
 
-nextArrow.addEventListener("click", () => {
-    const visibleImages = getVisibleImages();
-    if (!visibleImages.length) return;
-    currentIndex = (currentIndex + 1) % visibleImages.length;
-    lightboxImg.src = visibleImages[currentIndex].src;
-});
+        let currentIndex = -1;
 
-// Keyboard support
-document.addEventListener("keydown", e => {
-    if (lightbox.style.display === "flex") {
-        if (e.key === "Escape") lightbox.style.display = "none";
-        if (e.key === "ArrowLeft") prevArrow.click();
-        if (e.key === "ArrowRight") nextArrow.click();
+        function getVisibleImages() {
+            return [...document.querySelectorAll(".gallery-item:not(.hide) img.loaded")];
+        }
+
+        function showLightbox(index) {
+            const visibleImages = getVisibleImages();
+            if (!visibleImages.length) return;
+            currentIndex = index;
+            lightbox.style.display = "flex";
+            lightboxImg.src = visibleImages[currentIndex].src;
+        }
+
+        // Open lightbox on click
+        document.addEventListener("click", e => {
+            if (e.target.matches(".gallery-item img.loaded")) {
+                const visibleImages = getVisibleImages();
+                const index = visibleImages.indexOf(e.target);
+                if (index !== -1) showLightbox(index);
+            }
+        });
+
+        // Close lightbox
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => lightbox.style.display = "none");
+        }
+
+        lightbox.addEventListener("click", e => {
+            if (e.target === lightbox) lightbox.style.display = "none";
+        });
+
+        // Navigate with arrows
+        if (prevArrow) {
+            prevArrow.addEventListener("click", () => {
+                const visibleImages = getVisibleImages();
+                if (!visibleImages.length) return;
+                currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
+                lightboxImg.src = visibleImages[currentIndex].src;
+            });
+        }
+
+        if (nextArrow) {
+            nextArrow.addEventListener("click", () => {
+                const visibleImages = getVisibleImages();
+                if (!visibleImages.length) return;
+                currentIndex = (currentIndex + 1) % visibleImages.length;
+                lightboxImg.src = visibleImages[currentIndex].src;
+            });
+        }
+
+        // Keyboard support
+        document.addEventListener("keydown", e => {
+            if (lightbox.style.display === "flex") {
+                if (e.key === "Escape") lightbox.style.display = "none";
+                if (e.key === "ArrowLeft" && prevArrow) prevArrow.click();
+                if (e.key === "ArrowRight" && nextArrow) nextArrow.click();
+            }
+        });
     }
-});
+}
 
 
 function initKnowMore() {
