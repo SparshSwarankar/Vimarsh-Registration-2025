@@ -10,7 +10,7 @@ const CONFIG = {
   EVENT_NAME: 'Vimarsh 2025',
   ORGANIZATION_NAME: 'YUVA-Youth United For Vision & Action',
   SUPPORT_EMAIL: 'yuvavimarsh.helpdesk@gmail.com',
-  WEBHOOK_SECRET: 'vimarsh_2025_webhook_secret_key_12345',
+  WEBHOOK_SECRET: 'RajDeep7354',
   ADMIN_KEY: 'Vimarsh0987'
 };
 
@@ -250,7 +250,7 @@ function handleCreateOrder(data) {
     // Determine amount based on payment category
     let amount = CONFIG.REGISTRATION_AMOUNT; // Default student amount
     if (data.paymentCategory === 'Teacher' || data.paymentCategory === 'Other') {
-      amount = 100000; // ₹1000 = 100000 paise
+      amount = 120000; // ₹1200 = 120000 paise
     }
 
     const orderData = {
@@ -640,7 +640,7 @@ function sendPaymentConfirmationEmail(registrationDetails, paymentId) {
     // Determine amount based on payment category
     let amount = 300; // Default student amount
     if (registrationDetails.paymentCategory === 'Teacher' || registrationDetails.paymentCategory === 'Other') {
-      amount = 1000;
+      amount = 1200;
     }
 
     const htmlBody = `

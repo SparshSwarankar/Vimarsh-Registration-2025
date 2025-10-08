@@ -874,8 +874,8 @@
                         <select id="paymentCategory" name="paymentCategory" required>
                             <option value="">Select Category</option>
                             <option value="Student" data-amount="300">Student - ₹300</option>
-                            <option value="Teacher" data-amount="1000">Teacher - ₹1000</option>
-                            <option value="Other" data-amount="1000">Other - ₹1000</option>
+                            <option value="Teacher" data-amount="1200">Teacher - ₹1200</option>
+                            <option value="Other" data-amount="1200">Other - ₹1200</option>
                         </select>
                         <div class="error-message" id="paymentCategoryError"></div>
                     </div>
@@ -931,7 +931,7 @@
         });
         // Configuration - Replace with your actual values
         const CONFIG = {
-            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbx3KMY52nPoVXIee_8gucUKusqMadZ2tRJ8eE_qyDlSzLaj8PlKfWWqCOG6wfSTBadE/exec', // Replace with your Apps Script Web App URL
+            APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwlxiTvnPfIDokCb3K-9FLopViBL9N89EmuoQigjodUOo5QRyDDbdhaUazNIpQWfuM7/exec', // Replace with your Apps Script Web App URL
             RAZORPAY_KEY_ID: 'rzp_live_RCnlaKffG5VeY0', // Replace with your Razorpay Key ID
             REGISTRATION_AMOUNT: 30000 // Amount in paise (₹300 = 30000 paise) - default student amount
         };
@@ -1146,7 +1146,7 @@
                     contact: formData.mobile
                 },
                 theme: {
-                    color: '#667eea'
+                    color: '#8b0000'
                 },
                 handler: function (response) {
                     // Payment successful
